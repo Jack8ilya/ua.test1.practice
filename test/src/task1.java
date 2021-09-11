@@ -1,13 +1,26 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class task1 {
     public static void main(String[] args) {
-        int[] mas = new int[50];
-        fillingTheArray(mas);
-        System.out.println(Arrays.toString(mas));
-        System.out.println(Arrays.toString(sortArray(mas)));
-        System.out.println("Count of unique elements - " + countOfUniqueElements(sortArray(mas)));
+        int[] sourceNumbers = new int[50];
+        fillingTheArray(sourceNumbers);
+        System.out.println(Arrays.toString(sourceNumbers));
+        System.out.println(Arrays.toString(sortArray(sourceNumbers)));
+        String number;
+        List<Integer> result = new ArrayList<Integer>();
+        for (Integer sourceNumber : sourceNumbers) {
+            number = sourceNumber.toString();
+            if (number.length() == 3 && number.charAt(0) != number.charAt(1)
+                    && number.charAt(1) != number.charAt(2)
+                    && number.charAt(0) != number.charAt(2)) {
+                result.add(sourceNumber);
+            }
+        }
+        System.out.println("Все трехзначные числа, "
+                + "в десятичной записи которых нет одинаковых цифр: " + result);
     }
 
     public static int[] fillingTheArray(int[] mas) {
@@ -30,19 +43,5 @@ public class task1 {
             }
         }
         return copyArray;
-    }
-
-    public static int countOfUniqueElements(int[] mas) {
-        int number = mas[0];
-        int rez = 1;
-        for (int count : mas) {
-            if (number == count) {
-                continue;
-            } else {
-                number = count;
-                rez++;
-            }
-        }
-        return rez;
     }
 }
